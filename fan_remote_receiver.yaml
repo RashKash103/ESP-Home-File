@@ -1,0 +1,41 @@
+esphome:
+  name: fan_remote_receiver
+  platform: ESP8266
+  board: nodemcuv2
+  includes:
+    - fan_receiver.h
+
+binary_sensor:
+  - platform: custom
+    lambda: |-
+      auto fan_sensor = new FanReceiverBinarySensor();
+      App.register_component(fan_sensor);
+      return {fan_sensor->fan_light_button, fan_sensor->fan_low_button, fan_sensor->fan_med_button, fan_sensor->fan_high_button, fan_sensor->fan_off_button};
+    
+    binary_sensors:
+    - name: "Fan Light Button"
+    - name: "Fan Low Button"
+    - name: "Fan Medium Button"
+    - name: "Fan High Button"
+    - name: "Fan Off Button"
+
+wifi:
+  ssid: "WiFi SSID"
+  password: "PASSWORD"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Fan Remote Receiver"
+    password: "aRp7HSLuQx6P"
+
+captive_portal:
+
+# Enable logging
+logger:
+  level: DEBUG
+  esp8266_store_log_strings_in_flash: False
+  
+# Enable Home Assistant API
+api:
+
+ota:
