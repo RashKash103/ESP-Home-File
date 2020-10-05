@@ -24,7 +24,7 @@ The remote I used for this had the DIP switches in the `1100` position. That mea
 
 If you want to use any code other than `1100`, then after uploading the software to the board, open up the `LOGS` on the ESPHome panel. Once the log viewer opens up, press any button on your remote and it will show `Value: XXX` where `XXX` is the number you need to note down for the pressed button. Then, modify the lines show below in `fan_receiver.h` to include the correct corresponding codes.
 
-```arduino
+```c++
     void setup() override {
 
         remote = new HT12E(RECEIVER_PIN);
